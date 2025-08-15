@@ -81,7 +81,9 @@ class _TutorInfoDialogState extends State<TutorInfoDialog>
             Wrap(
               children: (widget.data.subjectData ?? []).map((e) {
                 return Card(
-                  color: HexColor(e.colorcode ?? ""),
+                  color: HexColor((e.colorcode != null && e.colorcode!.trim().isNotEmpty)
+                      ? e.colorcode!
+                      : '#000000'),
                   margin: EdgeInsets.all(2),
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20)),

@@ -430,7 +430,7 @@ class _MyHomePageState extends State<Tutor_Profile> {
                                         fontWeight: FontWeight.bold,
                                         fontSize: 20)))
                           ])),
-                          subjectGridView(userResponse.data?.subjectData ?? []),
+                          subjectGridView(userResponse.data?.subjectData  ?? []),
                           Padding(
                               padding: EdgeInsets.only(top: 10, left: 150),
                               child: GestureDetector(
@@ -588,7 +588,8 @@ class _MyHomePageState extends State<Tutor_Profile> {
       mobileController.text = userResponse.data?.mobileNumber.toString() ?? "";
       descriptionController.text = userResponse.data?.description ?? "";
       _controller.sink.add(userResponse);
-      _subjectListController.sink.add(userResponse.data?.subjectData ?? []);
+      _subjectListController.sink.add(userResponse.data?.subjectData as List<String>? ?? []);
+
     }
     return response;
   }

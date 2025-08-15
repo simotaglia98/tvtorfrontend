@@ -1,18 +1,17 @@
 import 'package:fluttertvtor/models/response/locationresponse.dart';
-import 'package:fluttertvtor/models/response/update_profile_response.dart';
 
-class UserResponse {
+class UpdateProfileResponse {
   bool? success;
-  Data? data;
+  UpdateProfileData? data;
   String? message;
   int? statusCode;
 
-  UserResponse({this.success, this.data, this.message, this.statusCode});
+  UpdateProfileResponse({this.success, this.data, this.message, this.statusCode});
 
-  factory UserResponse.fromJson(Map<String, dynamic> json) {
-    return UserResponse(
+  factory UpdateProfileResponse.fromJson(Map<String, dynamic> json) {
+    return UpdateProfileResponse(
       success: json['success'],
-      data: json['data'] != null ? Data.fromJson(json['data']) : null,
+      data: json['data'] != null ? UpdateProfileData.fromJson(json['data']) : null,
       message: json['message'],
       statusCode: json['statusCode'],
     );
@@ -30,14 +29,14 @@ class UserResponse {
   }
 }
 
-class Data {
+class UpdateProfileData {
   List<String>? location;
   List<String>? subjects;
   bool? status;
   bool? isDeleted;
   List<String>? subjectId;
   List<String>? subjectData;
-  List<dynamic>? locationData;
+  List<LocationData>? locationData;
   List<DataItem>? locationList;
   String? managerId;
   String? userType;
@@ -55,7 +54,7 @@ class Data {
   String? updatedAt;
   int? iV;
 
-  Data({
+  UpdateProfileData({
     this.location,
     this.subjects,
     this.status,
@@ -81,15 +80,14 @@ class Data {
     this.iV,
   });
 
-  factory Data.fromJson(Map<String, dynamic> json) {
-    return Data(
+  factory UpdateProfileData.fromJson(Map<String, dynamic> json) {
+    return UpdateProfileData(
       location: json['location'] != null
           ? List<String>.from(json['location'])
-          : (json['loctaion'] != null
-              ? List<String>.from(json['loctaion'])
-              : null),
-      subjects:
-          json['subjects'] != null ? List<String>.from(json['subjects']) : null,
+          : (json['loctaion'] != null ? List<String>.from(json['loctaion']) : null),
+      subjects: json['subjects'] != null
+          ? List<String>.from(json['subjects'])
+          : null,
       status: json['status'],
       isDeleted: json['isDeleted'],
       description: json['description'],
@@ -98,23 +96,15 @@ class Data {
           ? List<String>.from(json['subjectId'])
           : null,
       subjectData: json['subjectData'] != null
-          ? (json['subjectData'] as List).map((e) {
-        if (e is String) {
-          return e;
-        } else if (e is Map<String, dynamic>) {
-          return e['subject']?.toString() ?? '';
-        } else {
-          return '';
-        }
-      }).toList()
+          ? List<String>.from(json['subjectData'])
           : null,
       locationData: json['locationData'] != null
-          ? List<dynamic>.from(json['locationData'])
+          ? List<LocationData>.from(json['locationData'])
           : null,
       locationList: json['locationList'] != null
           ? (json['locationList'] as List)
-              .map((i) => DataItem.fromJson(i))
-              .toList()
+          .map((i) => DataItem.fromJson(i))
+          .toList()
           : null,
       managerId: json['managerId'],
       userType: json['userType'],
@@ -181,8 +171,8 @@ class LocationData {
 
   factory LocationData.fromJson(Map<String, dynamic> json) {
     return LocationData(
-      id: json['_id'],
-      location: json['location'],
+      id: json['_id'] ,
+      location: json['location'] ,
     );
   }
 
@@ -191,60 +181,5 @@ class LocationData {
       '_id': id,
       'location': location,
     };
-  }
-}
-
-extension UserResponseMapper on UserResponse {
-  static UserResponse fromUpdateProfileResponse(
-      UpdateProfileResponse updateProfile) {
-    final updData = updateProfile.data;
-    if (updData == null) {
-      return UserResponse(
-        success: updateProfile.success,
-        data: null,
-        message: updateProfile.message,
-        statusCode: updateProfile.statusCode,
-      );
-    }
-    List<String>? mappedLocationData;
-    if (updData.locationData != null) {
-      mappedLocationData = updData.locationData!
-          .map((locData) => locData.location ?? '')
-          .where((loc) => loc.isNotEmpty)
-          .toList();
-    }
-
-    final userData = Data(
-      location: updData.location,
-      subjects: updData.subjects,
-      status: updData.status,
-      isDeleted: updData.isDeleted,
-      subjectId: updData.subjectId,
-      subjectData: updData.subjectData,
-      locationData: mappedLocationData,
-      locationList: updData.locationList,
-      managerId: updData.managerId,
-      userType: updData.userType,
-      sId: updData.sId,
-      name: updData.name,
-      surname: updData.surname,
-      imageUrl: updData.imageUrl,
-      email: updData.email,
-      password: updData.password,
-      description: updData.description,
-      availability: updData.availability,
-      mobileNumber: updData.mobileNumber,
-      code: updData.code,
-      createdAt: updData.createdAt,
-      updatedAt: updData.updatedAt,
-      iV: updData.iV,
-    );
-
-    return UserResponse(
-      success: updateProfile.success,
-      data: userData,
-      message: updateProfile.message,
-      statusCode: updateProfile.statusCode,
-    );
   }
 }

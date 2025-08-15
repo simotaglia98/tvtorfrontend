@@ -38,7 +38,7 @@ class CustomDrawer extends StatelessWidget {
                       alignment: Alignment.bottomRight,
                       children: <Widget>[
                         Container(
-                          height: 100,
+                          height: 100  ,
                           width: 100,
 //                                          decoration: BoxDecoration(
 //                                              color: Colors.blue,

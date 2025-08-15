@@ -190,11 +190,15 @@ class _MyHomePageState extends State<InviteTutor> {
     if (response.success == true) {
       value = response.data?.code.toString() ?? "";
       _controller.add(value);
+      setState(() {
+
+      });
     }
   }
 
   //182668
   Future<void> share() async {
+    debugPrint("share button is pressed!");
     await SharePlus.instance.share(
       ShareParams(
         text: "Code is $value",

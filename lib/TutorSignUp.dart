@@ -72,7 +72,7 @@ class _MyHomePageState extends State<TutorSignUp> with RegisterContract {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   String? location;
   String? id;
-  final String url = "https://tutorbackend.herokuapp.com/api/v1/location";
+  final String url = "https://tvtorbackend.onrender.com/api/v1/location";
 
 //  List<Data> data = <Data>[]; //edited line
 

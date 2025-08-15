@@ -156,7 +156,7 @@ class _CommonDrawerState extends State<CommonDrawer>
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[
                         Container(
-                          margin: const EdgeInsets.only(top: 5),
+                          margin: const EdgeInsets.only(top: 3),
 //               padding: EdgeInsets.only(bottom: 20.0, left: 50),
 //                              width: 100.0,
 //                              height: 100.0,
